@@ -28,7 +28,7 @@
 </cffunction>
 
 <cffunction name="getBooksBySearch" access="remote" returntype="Any" >
-	<cfargument name="searchText" required="true" type="string" default="" >
+	<cfargument name="searchText" required="true" type="string" default=""  >
 		<cfquery name="books" datasource="eakinsWebUser">
 			SELECT distinct books.id, 
 				books.slug, 
@@ -39,7 +39,7 @@
 			FROM books INNER JOIN categorizations ON books.id = categorizations.book_id
 				 INNER JOIN categories ON categorizations.category_id = categories.id
 				 LEFT OUTER JOIN newphotoassets ON books.id = newphotoassets.bookID
-			WHERE (books.title LIKE '%#searchText#%' OR books.credits LIKE '%#searchText#%' OR books.long_description LIKE '%#searchText#%')
+			WHERE (books.title LIKE '%#searchText#%' OR books.credits LIKE '%#searchText#%' OR books.long_description LIKE '%#searchText#%' OR books.colophon LIKE '%#searchText#%')
 			AND newphotoassets.assetPhotoType = 1 and newphotoassets.position = 0
 			ORDER BY books.`year` DESC
 		</cfquery>
