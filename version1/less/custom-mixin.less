@@ -1,0 +1,68 @@
+.full-width {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+.clearfix{
+	&:after{
+		display:block;
+		clear:both;
+		content:'';
+	}
+}
+.listreset{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+.hide-text{
+	overflow:hidden;
+	text-indent:-9999px;
+}
+.transition{
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-ms-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+
+.tranform(@value){
+	-webkit-transform: rotate(@value);
+	-moz-transform: rotate(@value);
+	-o-transform: rotate(@value);
+	-ms-transform: rotate(@value);
+	transform: rotate(@value);
+}
+
+.arrow{
+	width: 0; 
+	height: 0; 
+	border-left: 15px solid transparent;
+	border-right: 15px solid transparent;
+	border-bottom: 18px solid @brown;
+	content: "";
+
+	position: absolute;
+	left:50%;
+	top: -15px;
+
+	margin:0 0 0 -15px;
+}
+.bg-after{
+	position:absolute;
+	top:0;
+	left:0;
+	content:'';
+}
+// sample: .box-shadow(0 0 5px rgba(209,209,209,0.8));
+.box-shadow(@shadows...) {
+  -webkit-box-shadow: @shadows;
+  box-shadow: @shadows;
+}
+.fontsizeem(@size:@base-font-em, @value: 24,@base: 19) {
+	font-size: @size + px;
+	font-size: (@size / @base) * 1em; 
+	line-height: @value + px;
+	line-height: (@value / @size) * 1em;
+}

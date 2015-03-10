@@ -1,0 +1,264 @@
+<!doctype html>
+<html>
+	
+<head>
+	<!-- set the encoding of your site -->
+	<meta charset="utf-8">
+	<!-- set the viewport width and initial-scale on mobile devices -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<!-- set title of your site -->
+	<title>Eakins Press Foundation</title>
+	<!-- include the site stylesheets -->
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.css">
+	<link href="css/all.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/js.css" rel="stylesheet" type="text/css" media="all" />
+	<!--[if lt IE 9]>
+		<script type="text/javascript" src="js/ie.js"></script>
+	<![endif]-->
+	
+<cfscript>
+cageData = CreateObject("Component","data/eakinsData");	
+</cfscript>		
+</head>
+<body>
+	<!-- main container of all the page elements -->
+	<div id="wrapper" class="home">
+		<!-- header of the page -->
+		<header id="header">
+			<div class="container">
+				<!-- logo of the page -->
+				<div class="logo">
+					<a href="#">
+						<span class="icon-svg2"></span>
+						<img src="images/logo.svg" alt="Eakins Press Foundation" class="alignleft">
+					</a>
+				</div>
+				<!-- navigatoin of the page -->
+				<nav class="navbar navbar-default">
+					<div class="container-fluid">
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<div class="navbar-header">
+						  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						  </button>
+						</div>
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav">
+								<li class="dropdown">
+									<a href="publications.cfm" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Publications </a>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="publications.cfm?view=art">Art &amp; Culture</a></li>
+										<li><a href="publications.cfm?view=dance">Dance &amp; Music</a></li>
+										<li><a href="publications.cfm?view=lit">Literature</a></li>
+										<li><a href="publications.cfm?view=photo">Photography</a></li>
+									</ul>
+								</li>
+								<li><a href="#">Blog</a></li>
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About the Press</a>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="#">Overview</a></li>
+										<li><a href="#">History of the Press</a></li>
+										<li><a href="#">Leslie Katz &amp; <br>Appreciations</a></li>
+									</ul>
+								</li>
+								<li><a href="#">Support the Press</a></li>
+							</ul>
+						</div><!-- /.navbar-collapse -->
+					</div><!-- /.container-fluid -->
+				</nav>
+			</div>
+		</header>
+		<!-- contain main informative part of the site -->
+		<main id="main" role="main">
+			<!-- main carousel of the page -->
+			<section class="carousel-area">
+				<!-- carousel-holder -->
+				<div class="carousel-holder  win-min-height">
+					<!-- carousel -->
+					<div class="carousel win-height">
+						<!-- mask -->
+						<div class="mask">
+						<!-- slideset -->
+							<div class="js-slideset">
+								<div class="js-slide slick-slide">
+									<div class="image-area">
+										<a href="#"><img src="images/img01.png" alt="Image Description"></a>
+									</div>
+								</div>
+								<div class="js-slide slick-slide">
+									<div class="image-area">
+										<a href="#"><img src="images/img15.jpg" alt="Image Description"></a>
+									</div>
+								</div>
+								<div class="js-slide slick-slide">
+									<div class="image-area">
+										<a href="#"><img src="images/img03.png" alt="Image Description"></a>
+									</div>
+								</div>
+								<div class="js-slide slick-slide">
+									<div class="image-area">
+										<a href="#"><img src="images/img01.png" alt="Image Description"></a>
+									</div>
+								</div>
+								<div class="js-slide slick-slide">
+									<div class="image-area">
+										<a href="#"><img src="images/img15.jpg" alt="Image Description"></a>
+									</div>
+								</div>
+								<div class="js-slide slick-slide">
+									<div class="image-area">
+										<a href="#"><img src="images/img03.png" alt="Image Description"></a>
+									</div>
+								</div>
+ 							</div>
+						</div>
+					</div>
+					<a href="#publications" class="down"><i class="icon-svg"></i></a>
+				</div>
+			</section>
+			<!-- publications -->
+			<section class="publications" id="publications">
+				<div class="container">
+					<h1>PUBLICATIONS</h1>
+					<!-- tabs-area -->
+					<section class="tabs-area">
+						<!-- nav-holder -->
+						<div class="nav-holder">
+							<ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+							<li class="artNav active"><a href="#" onclick="getBooksSlide(3)">Art &amp; Culture</a></li>
+							<li class="danceNav"><a href="#" onclick="getBooksSlide(5)">Dance &amp; Music</a></li>
+							<li class="litNav"><a href="#" onclick="getBooksSlide(4)">Literature</a></li>
+							<li class="photoNav"><a href="#" onclick="getBooksSlide(2)">Photography</a></li>
+						</ul>
+						</div>
+						<!-- tab-content -->
+						<div id="my-tab-content" class="tab-content">
+							<!-- tab-1 -->
+							<div class="tab-pane active" id="tab1">
+								<div class="textarea">
+									<p>Showcasing the works of such celebrated artists as Elie Nadelman, Augustus St. Gaudens, Raoul Hague, Mary Frank, and Louis Sullivan, these elegant monographs provide rare insight into each subject’s process and history through distinctive presentation and critical scholarship.</p>
+								</div>
+							</div>
+							<!-- tab-2 -->
+							<div class="tab-pane" id="tab2">
+								<div class="textarea">
+									<p>Born of the enduring relationship between the Eakins Press Foundation and the performing arts, these books include the definitive catalogue raisonné of George Balanchine’s choreography, the complete collection of nearly sixty years of Lincoln Kirstein’s program notes, as well as the autobiography of Louis Armstrong.</p>
+								</div>
+							</div>
+							<!-- tab-3 -->
+							<div class="tab-pane" id="tab3">
+								<div class="textarea">
+									<p>From Walt Whitman’s definitive first edition of Leaves of Grass to Thomas Jefferson’s personal edit of the Gospels of the New Testament, to the charming humor of writers like Jane Mayhall and Jean Garrigue, these books range in subject matter from anonymous African poetry to current cultural criticism.</p>
+								</div>
+							</div>
+							<!-- tab-4 -->
+							<div class="tab-pane" id="tab4">
+								<div class="textarea">
+									<p>The Press’s unique contribution to the celebration of photography began with publications by Walker Evans, Richard Benson, and Carl Van Vechten, and continues with seminal monographs by Lee Friedlander, and the recently rediscovered Frederick W. Glasier. </p>
+								</div>
+							</div>
+						</div>
+					</section>
+					 
+					<div class="scroll-block">
+						<!-- jcf-scrollable -->
+						<div class="slider">
+							<div class="mask jcf-scrollable"> <span id="backStreetSlide"<!--- inject slides here ---> </span>
+								<script id="homeSlide-template" type="x-handlebars-template">
+								{{#each data}}
+									<div class="slide">
+										<div class="holder">
+											<a href="book.cfm?slug={{slug}}"><img src="images/portraits/portraitsCompressed/{{filename}}" alt="Image Description">
+												<header class="head">
+													<h2>{{title}}</h2>
+													<h3>{{credits}}</h3>
+												</header>
+											</a>
+										</div>
+									</div>
+									{{/each}}
+								</script>
+							</div>
+						</div>
+							<a href="#" class="btn-prev"><i class="icon-svg"></i></a>
+							<a href="#" class="btn-next"><i class="icon-svg"></i></a>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<!-- footer of the page -->
+		<footer id="footer">
+			<div class="container">
+				<!-- footer content -->
+				<div class="footer-content">
+					<!-- footer logo -->
+					<div class="logo">
+						<a href="#"><i class="icon-svg2"></i></a>
+					</div>
+					<address>
+						<span><a href="#">Eakins Press Foundation</a></span>
+						<span>20 West 44th Street, #405</span>
+						<span>New York, NY 10036</span>
+						<span><a href="tel:2127642255" class="phone">(212) 764-2255</a></span>
+						<span><a href="mailto:&#105;&#110;&#102;&#111;&#064;&#101;&#097;&#107;&#105;&#110;&#115;&#112;&#114;&#101;&#115;&#115;&#046;&#099;&#111;&#109;" class="email">&#105;&#110;&#102;&#111;&#064;&#101;&#097;&#107;&#105;&#110;&#115;&#112;&#114;&#101;&#115;&#115;&#046;&#099;&#111;&#109;</a></span>
+					</address>
+					<!-- social-networks -->
+					<ul class="social-networks">
+						<li><a href="#"><i class="icon-facebook"></i></a></li>
+						<li><a href="#"><i class="icon-twitter"></i></a></li>
+						<li><a href="#"><i class="icon-instragram"></i></a></li>
+					</ul>
+				</div>
+				<span class="copyright">&copy;2015 Eakins Press Foundation. <a href="#">Terms and Conditions</a>. <a href="#">Site Credits.</a></span>
+			</div>
+		</footer>
+	</div>
+	<!-- include jQuery library -->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript">window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
+	
+	<script>
+	 $(document).ready(function(e) {
+		 
+		 //alert('inready');	
+		 getBooksSlide(5);
+		 
+		
+		 });
+	
+	
+	</script>
+	<script src="js/bootstrap.min.js"></script>
+	<!-- include custom JavaScript -->
+	<script src="js/jquery.main.js"></script>
+	
+	
+	<!--- custom javascript --->
+	<script type="text/javascript" src="js/jquery.serializecfjson-0.2.min.js"></script>
+	<script type="text/javascript" src="js/handlebars.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+
+
+	
+	
+<script src="//use.typekit.net/gmm3qiu.js"></script>
+<script>try{Typekit.load();}catch(e){}</script>	<script type="text/javascript">
+		if (navigator.userAgent.match(/IEMobile\/10\.0/) || navigator.userAgent.match(/MSIE 10.*Touch/)) {
+			var msViewportStyle = document.createElement('style')
+			msViewportStyle.appendChild(
+			document.createTextNode(
+			 '@-ms-viewport{width:auto !important}'
+			)
+			)
+			document.querySelector('head').appendChild(msViewportStyle)
+		}
+	</script>
+	
+</body>
+</html>
