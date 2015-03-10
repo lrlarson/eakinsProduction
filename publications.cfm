@@ -216,6 +216,12 @@
 	<script>
 	 $(document).ready(function(e) {
 		 
+		 $("#searchText").keyup(function(event){
+    		if(event.keyCode == 13 && $('#searchText').val() != '' ){	
+        	startSearch();
+			}
+		 });
+		 
 		 if (getParam("view") == 'art'){
 			 	$('.artNav').addClass('active');
 			 	bookClass = 3;
