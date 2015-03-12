@@ -7,6 +7,48 @@
  		 <cfreturn this />
 </cffunction>
 
+
+<cffunction name="getRelatedItemsForBook" access="remote" returntype="Any" >
+	<cfargument name="slug" type="string" required="true" >
+	<cfquery name="relatedBooks" datasource="eakinsWebUser">
+SELECT relateditems.id, 
+	relateditems.content, 
+	relateditems.book_id, 
+	relateditems.title, 
+	relateditemclasses.relatedClass,
+	 relateditemclasses.className,
+	relateditemclasses.id AS itemClass, 
+	books.slug
+FROM relateditems INNER JOIN relateditemclasses ON relateditems.relatedItemClass = relateditemclasses.id
+	 INNER JOIN books ON relateditems.book_id = books.id	
+	 WHERE books.slug = '#slug#'
+	</cfquery>
+	<cfreturn relatedBooks>
+</cffunction>
+
+<cffunction name="getRelatedItemsForBookByCat" access="remote" returntype="Any" >
+	<cfargument name="slug" type="string" required="true" >
+	<cfargument name="cat" type="numeric" required="true" >
+	<cfquery name="relatedBooks" datasource="eakinsWebUser">
+		SELECT relateditems.id, 
+			relateditems.content, 
+			relateditems.book_id, 
+			relateditems.title, 
+			relateditemclasses.relatedClass, 
+			relateditemclasses.id AS itemClass, 
+			relateditemclasses.className,
+			books.slug
+		FROM relateditems INNER JOIN relateditemclasses ON relateditems.relatedItemClass = relateditemclasses.id
+			 INNER JOIN books ON relateditems.book_id = books.id
+		WHERE books.slug = '#slug#'
+	<cfif cat NEQ 99>
+		AND relateditemclasses.id = #cat#
+	</cfif>	
+	</cfquery>
+	<cfreturn relatedBooks>
+</cffunction>
+
+
 <cffunction name="getBooksByClass" access="remote" returntype="Any" >
 	<cfargument name="bookClass" required="true" type="numeric" default="2" >
 		<cfquery name="books" datasource="eakinsWebUser">

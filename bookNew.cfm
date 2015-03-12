@@ -34,7 +34,7 @@
 	<!--[if lt IE 9]>
 		<script type="text/javascript" src="js/ie.js"></script>
 	<![endif]-->
-<cfparam name="slug" default="the-stravinsky-festival">
+<cfparam name="slug" default="a-system-of-architectural-ornament">
 <cfscript>
 eakinsData= CreateObject("Component","data/webData");
 eakinsData.init();
@@ -69,12 +69,18 @@ spreads = eakinsData.getSpreadsForBook(#slug#);
 </style>
 
 <script>
+/*	
 Snipcart.execute('config', 'allowed_shipping_methods', [
     'usps-standard-post',
-    'usps-priority-mail-2-day',
-    'usps-priority-mail-1-day'
-   
+    'usps-priority-mail-express-2-days',
+    'usps-priority-mail-2-day'
 ]);	
+*/
+
+Snipcart.execute('config', 'allowed_shipping_methods', [ 
+'usps-priority-mail-1-day', 
+'usps-priority-mail-2-day' 
+]);
 
 var cartViews = 0;
 
@@ -103,7 +109,10 @@ Snipcart.execute('bind', 'page.change', function (page) {
 
 </script>		
 <!--- /snipcart --->
-	
+
+<script>
+var thisSlug = '';	
+</script>	
 </head>
 <body>
 	<!-- main container of all the page elements -->
@@ -134,7 +143,7 @@ Snipcart.execute('bind', 'page.change', function (page) {
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav">
 								<li class="dropdown active">
-									<a href="publications.cfm" class=" btn dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Publications </a>
+									<a href="publications.cfm" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Publications </a>
 									<ul class="dropdown-menu" role="menu">
 										<li><a href="publications.cfm?view=art">Art &amp; Architecture</a></li>
 										<li><a href="publications.cfm?view=dance">Dance &amp; Music</a></li>
@@ -144,7 +153,7 @@ Snipcart.execute('bind', 'page.change', function (page) {
 								</li>
 								<!--<li><a href="http://blog.eakinspress.com">Blog</a></li>-->
 								<li class="dropdown">
-									<a href="about_the_press.cfm" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About the Press</a>
+									<a href="about.cfm" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About the Press</a>
 									<ul class="dropdown-menu" role="menu">
 										<li><a href="about_the_press.cfm">Overview</a></li>
 										<li><a href="history_of_the_press.cfm">History of the Press</a></li>
@@ -217,15 +226,8 @@ Snipcart.execute('bind', 'page.change', function (page) {
 								<cfelse>
 								<li><a href="publications.cfm?view=photo">Photography</a></li>
 								</cfif>
-								</cfoutput>
-								
-								<li>
-								Search:<input type="text" width="25px">
-								<button name="search" id="search" title="search">Search Books</button>
-								</li>
-								
-								
-								
+								</cfoutput>		
+
 							</ul>
 						</nav>
 					</div>
@@ -297,6 +299,46 @@ Snipcart.execute('bind', 'page.change', function (page) {
 				<a href="#" class="btn-next"><i class="icon-svg"></i></a>
 				<div class="pagination"></div>
 			</section>
+			<!-- boxes- -->
+			<section class="boxes">
+				<!-- tabs-area -->
+				<a name="related"></a>
+				<div class="tabs-area">
+					<div class="container">
+						<h1>RELATED MATERIALS</h1>
+							<!-- nav-holder -->
+							<div class="isotope-filter">
+								<div class="nav-holder filters">
+									<ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+										<li class="active" id="allCats"><a href="#"  class="show-all">All</a></li>
+										<li id="reviewCat"><a href="#" rel='review'>Reviews</a></li>
+										<li id="eventCat"><a href="#" rel='event'>Events</a></li>
+										<li id="resourceCat"><a href="#" rel='resource' >Resources</a></li>
+									</ul>
+								</div>
+									<!-- box-holder- -->
+									<div class="sort-boxes">
+										<div class="box-holder sort-boxes-holder" id="relatedArea"><!--- inject html here ---> </div>
+											<script id="text-template" type="x-handlebars-template">
+											{{#each data}}
+											<!-- box-->
+											<a href="#">
+												<article class="box large sort-box" rel={{relatedClass}}>
+													<span class="category">{{classname}}</span>
+													<span class="title">{{title}}</span>
+													<span class="source">{{{content}}}</span>	
+												</article>
+											</a>
+											<!-- box-->
+											{{/each}}
+											</script>
+											
+										
+									</div>
+								</div>
+							</div>
+					</div>
+			</section>
 		</main>
 		<!-- footer of the page -->
 		<footer id="footer">
@@ -352,11 +394,22 @@ Snipcart.execute('bind', 'page.change', function (page) {
 	</script>
 	<script id="cart-content-text" type="text/template">
     <div class="custom-snipcart-footer-text">
-    <h1 style="text-align:center">US Customers:</h1>
-    
-        <h2 style="text-align:center">Please use your 5 digit zipcode <i>without</i> the 4 digit extension.</h2>
-  
+    <h2>US Customers</h2>
+    <p>
+        Please use your 5 digit zipcode without the 4 digit extension.
+  </p>
     </div>
+  </script>
+  <script>
+   $(document).ready(function(e) {
+	   //alert('doc ready');
+	   thisSlug = getParam('slug');
+	   if (thisSlug == ''){
+		   thisSlug = 'a-system-of-architectural-ornament';
+		   }
+	   getRelatedItems(thisSlug,99);
+	   
+	   });
   </script>
 </body>
 </html>

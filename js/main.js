@@ -1,6 +1,41 @@
 var dataHost = "http://eakinspress.com/data/webData.cfc";
 var testString = 'bohunk';
 
+
+function getRelatedItems(slug,cat){
+	
+	
+	$.ajax({
+        url: dataHost,
+        data: {
+            method: 'getRelatedItemsForBookByCat',
+            returnFormat: 'json',
+            slug:slug,
+            cat:cat
+        },
+        method: 'GET',
+        dataType: "json",
+        async: true,
+        success: function (d, r, o) {
+            workReturn = $.serializeCFJSON({
+                data: d
+            });
+            console.log(workReturn);
+
+
+			
+            var relatedAreaTemplateScript = $('#text-template').html();
+            relatedItems= Handlebars.compile(relatedAreaTemplateScript);
+            $('#relatedArea').empty();
+            $('#relatedArea').append(relatedItems(workReturn));
+           //$("#relatedArea").listview().listview('refresh');
+           //setLinkFormats(bookType); 
+            
+        } 
+    });
+ }   
+
+
 function getBooks(bookType){
 	clearSearch();
 	$('#searchReport').hide();

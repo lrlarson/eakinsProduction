@@ -1309,8 +1309,8 @@ a.cart:hover {
 .boxes {
   overflow: hidden;
   background: #e8e7e5;
-  text-align: center;
-  padding: 0 0 50px;
+  text-align: left;
+  padding: 20px;
 }
 .boxes .container {
   padding-top: 53px;
@@ -1318,6 +1318,7 @@ a.cart:hover {
 .boxes .nav-holder {
   overflow: hidden;
   padding: 0 0 10px;
+  text-align: center;
 }
 @media screen and (max-width: 767px) {
   .boxes .nav-holder {
@@ -1333,6 +1334,7 @@ a.cart:hover {
   font-size: 1.31578947em;
   line-height: 30px;
   line-height: 1.2em;
+  text-align: center;
 }
 @media screen and (max-width: 767px) {
   .boxes h1 {
@@ -1354,6 +1356,8 @@ a.cart:hover {
   margin: 0 20px 15px 0;
   background: #ffffff;
   border: 1px solid #ffffff;
+  min-height: 220px;
+  padding: 20px;
 }
 .boxes .box .small-boxes {
   overflow: hidden;
@@ -1410,6 +1414,36 @@ a.cart:hover {
   width: 100%;
   height: auto;
   display: block;
+}
+.category {
+  position: relative;
+  display: block;
+  font-family: 'franklingothicbookcregular', sans-serif;
+  font-style: normal;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #999999;
+  letter-spacing: .07em;
+}
+.title {
+  position: relative;
+  display: block;
+  font-size: 22px;
+  color: #000;
+  margin-top: 25px;
+}
+.source {
+  position: relative;
+  display: block;
+  font-size: 16px;
+  color: #89381D;
+}
+.date {
+  position: relative;
+  display: block;
+  font-size: 16px;
+  color: #999999;
+  line-height: 18px;
 }
 /* tabs-area styles */
 .tabs-area {
