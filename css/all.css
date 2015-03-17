@@ -1359,6 +1359,13 @@ a.cart:hover {
   min-height: 220px;
   padding: 20px;
 }
+.boxes .box a {
+  color: #89381D;
+}
+.boxes .box a,
+.boxes .box a:hover {
+  text-decoration: none;
+}
 .boxes .box .small-boxes {
   overflow: hidden;
 }
@@ -1409,6 +1416,7 @@ a.cart:hover {
 }
 .boxes .box:hover {
   border-color: #89381d;
+  text-decoration: none;
 }
 .boxes .box img {
   width: 100%;
@@ -2396,6 +2404,12 @@ a.cart:hover {
   background: none;
   border: none;
   color: #808080;
+}
+.emptyCat,
+.emptyCat a {
+  text-decoration: none;
+  color: rgba(0, 0, 0, .2) !important;
+  cursor: none;
 }
 /* left-nav styles */
 .left-nav {

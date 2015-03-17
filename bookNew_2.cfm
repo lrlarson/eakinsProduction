@@ -44,6 +44,21 @@ editions = eakinsData.getEditionsForBook(#slug#);
 spreads = eakinsData.getSpreadsForBook(#slug#);
 relatedItems = eakinsData.getRelatedItemsForBook(#slug#);
 </cfscript>
+<cfquery dbtype="query" name="reviews">
+SELECT relatedClass from relatedItems
+where relatedClass = 'review'	
+</cfquery>
+<cfquery dbtype="query" name="events">
+SELECT relatedClass from relatedItems
+where relatedClass = 'event'	
+</cfquery>
+<cfquery dbtype="query" name="resources">
+SELECT relatedClass from relatedItems
+where relatedClass = 'resource'	
+</cfquery>	
+<cfset numberOfReviews = #reviews.RecordCount#>
+<cfset numberOfEvents = #events.RecordCount#>
+<cfset numberOfResources = #resources.RecordCount#>
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<!-- set title of your site -->
@@ -301,6 +316,7 @@ var thisSlug = '';
 				<div class="pagination"></div>
 			</section>
 			<!-- boxes- -->
+			<cfif relatedItems.recordcount GT 0>
 			<section class="boxes">
 				<!-- tabs-area -->
 				<a name="related"></a>
@@ -312,9 +328,27 @@ var thisSlug = '';
 								<div class="nav-holder filters">
 									<ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
 										<li class="active" id="allCats"><a href="#"  class="show-all">All</a></li>
+										
+										<cfif reviews.RecordCount GT 0>
 										<li id="reviewCat"><a href="#" rel='review'>Reviews</a></li>
-										<li id="eventCat"><a href="#" rel='event'>Events</a></li>
-										<li id="resourceCat"><a href="#" rel='resource' >Resources</a></li>
+										<cfelse>	
+										<li id="reviewCat"><a href="#" rel='review' class="emptyCat">Reviews</a></li>
+										</cfif>
+										
+										
+										
+										<cfif events.RecordCount GT 0>
+										<li id="eventCat"  ><a href="#" rel='event' >Events</a></li>
+										<cfelse>
+										<li id="eventCat"  ><a href="#" rel='event' class="emptyCat">Events</a></li>
+										</cfif>
+										
+										<cfif resources.RecordCount GT 0>
+											
+										<li id="resourceCat"><a href="#" rel='resource'  >Resources</a></li>
+										<cfelse>
+										<li id="resourceCat"><a href="#" rel='resource' class="emptyCat">Resources</a></li>
+										</cfif>
 									</ul>
 								</div>
 									<!-- box-holder- -->
@@ -323,7 +357,7 @@ var thisSlug = '';
 											
 											<cfoutput query="relatedItems">
 											<!-- box-->
-											<a href="##">
+											<a href="#link#">
 												<article class="box large sort-box" rel='#relatedClass#'>
 													<span class="category">#className#</span>
 													<span class="title">#title#</span>
@@ -331,15 +365,14 @@ var thisSlug = '';
 												</article>
 											</a>
 											<!-- box-->
-											</cfoutput>
-											
+											</cfoutput>	
 										</div>	
-										
 									</div>
 								</div>
 							</div>
 					</div>
 			</section>
+			</cfif>
 		</main>
 		<!-- footer of the page -->
 		<footer id="footer">
