@@ -153,7 +153,7 @@ var thisSlug = '';
 								</li>
 								<!--<li><a href="http://blog.eakinspress.com">Blog</a></li>-->
 								<li class="dropdown">
-									<a href="about.cfm" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About the Press</a>
+									<a href="about_the_press" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About the Press</a>
 									<ul class="dropdown-menu" role="menu">
 										<li><a href="about_the_press.cfm">Overview</a></li>
 										<li><a href="history_of_the_press.cfm">History of the Press</a></li>
