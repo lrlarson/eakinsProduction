@@ -8,6 +8,28 @@
 </cffunction>
 
 
+<cffunction name="getAllBooks" returntype="Any"  access="remote" >
+	<cfquery datasource="eakinsMySQL" name="allBooks">
+		SELECT books.slug, 
+		books.title
+		FROM books
+		ORDER BY books.title ASC
+	</cfquery>
+	<cfreturn allBooks>
+</cffunction>
+
+<cffunction name="getNewsForBook" access="remote" returntype="Any" >
+	<cfargument name="slug" type="string" required="true" >
+	<cfquery name="news" datasource="eakinsMySQL" >
+		SELECT books.id, 
+	books.news
+	FROM books
+	where books.slug = '#slug#'
+	</cfquery>
+	<cfreturn news>
+</cffunction>	
+
+
 <cffunction name="getRelatedItemsForBook" access="remote" returntype="Any" >
 	<cfargument name="slug" type="string" required="true" >
 	<cfquery name="relatedBooks" datasource="eakinsWebUser">

@@ -7,6 +7,21 @@
 </cffunction>
 
 
+<cffunction name="getBooksByClass" access="remote" returntype="Any" >
+	<cfargument name="bookClass" required="true" type="numeric" default="2" >
+		<cfquery name="books" datasource="eakinsMySQL">
+			SELECT books.id, 
+				books.title, 
+				books.credits, 
+				categories.name, 
+				categorizations.category_id
+			FROM books INNER JOIN categorizations ON books.id = categorizations.book_id
+				 INNER JOIN categories ON categorizations.category_id = categories.id
+			WHERE categorizations.category_id = 2
+		</cfquery>
+		<cfreturn books>
+</cffunction>
+
 
 <cffunction name="getAllBooks" returntype="Any"  access="remote" >
 	<cfquery datasource="eakinsMySQL" name="allBooks">
@@ -244,9 +259,10 @@
 
 <cffunction name="getRelatedClasses" access="remote" returntype="Any" >
 	<cfquery name="classes" datasource="eakinsMySQL">
-		SELECT relateditemclasses.id AS data, 
-	relateditemclasses.relatedClass AS label
-	FROM relateditemclasses
+		SELECT relateditemclasses.id AS `data`, 
+	relateditemclasses.relatedClass , 
+	relateditemclasses.className AS label
+FROM relateditemclasses
 	</cfquery>
 	<cfreturn classes>
 </cffunction>
@@ -260,7 +276,8 @@ SELECT relateditems.id,
 	relateditems.book_id, 
 	relateditems.title, 
 	relateditemclasses.relatedClass, 
-	relateditemclasses.id as itemClass
+	relateditemclasses.id as itemClass,
+	relateditems.link
 	FROM relateditems INNER JOIN relateditemclasses ON relateditems.relatedItemClass = relateditemclasses.id
 	WHERE relateditems.book_id = #book_ID#
 	</cfquery>
@@ -275,6 +292,7 @@ SELECT relateditems.id,
 			relateditems.book_id, 
 			relateditems.relatedItemClass, 
 			relateditems.title,
+			relateditems.link
 			FROM relateditems
 			where relateditems.id = #id#
 		</cfquery>
@@ -288,7 +306,8 @@ SELECT relateditems.id,
 		update relateditems
 		set relateditems.content = '#relatedItem.content#', 
 			relateditems.title = '#relatedItem.title#',
-			relateditems.relatedItemClass = #relatedItem.itemClass# 
+			relateditems.relatedItemClass = #relatedItem.itemClass#,
+			relateditems.link = '#relateditem.link#' 
 where  relateditems.id = #relatedItem.id#
 	</cfquery>
 	<cfreturn 1>
@@ -303,12 +322,14 @@ where  relateditems.id = #relatedItem.id#
 			content,
 			book_id,
 			relatedItemClass,
-			title
+			title,
+			link
 			)values(
 			'#newItem.content#',
 			#newItem.book_id#,
 			#newItem.itemClass#,
-			'#newItem.title#'
+			'#newItem.title#',
+			'#newItem.link#'
 			)
 	</cfquery>
 	<cfreturn 1>
@@ -356,6 +377,131 @@ where  relateditems.id = #relatedItem.id#
 	</cfquery>
 	<cfreturn 1>
 </cffunction>
+
+<cffunction name="getNewPhotoAssetsForBook" access="remote" returntype="Any" >
+	<cfargument name="book_ID" type="numeric" required="true" >
+	<cfquery name="photos" datasource="eakinsMySQL" >
+		SELECT newphotoassets.id, 
+			newphotoassets.fileName, 
+			newphotoassets.assetPhotoType, 
+			newphotoassets.bookID, 
+			newphotoassets.position,
+			assetphototypes.assetPhotoType AS photoTypeName
+			FROM newphotoassets INNER JOIN assetphototypes ON newphotoassets.assetPhotoType = assetphototypes.id
+			where newphotoassets.bookID = #book_ID#
+	</cfquery>
+	<cfreturn photos>
+</cffunction>
+
+
+<cffunction name="getNewPhotoTypes" access="remote" returntype="Any" >
+	<cfquery name="types" datasource="eakinsMySQL" >
+		SELECT assetphototypes.id AS `data`, 
+		assetphototypes.assetPhotoType AS label
+		FROM assetphototypes
+	</cfquery>
+	<cfreturn types>
+</cffunction>
+
+<cffunction name="saveNewPhotoTypeChanges" access="remote" returntype="Any" >
+	<cfargument name="newPhoto" type="any" required="true" >
+	<cfquery name="change" datasource="eakinsMySQL" >
+		update newphotoassets
+		set assetPhotoType = #newPhoto.assetPhotoType#,
+		fileName = '#newPhoto.fileName#',
+		position = #newPhoto.position#
+		where id = #newPhoto.id#
+	</cfquery>
+	<cfreturn 1>
+</cffunction>
+
+
+<cffunction name="createNewPhotoAsset" access="remote" returntype="Any" >
+	<cfargument name="newPhotoType" type="any" required="true" >
+	`	<cfquery datasource="eakinsMySQL" name="newPhoto">
+			insert into newphotoassets( assetPhotoType, bookID, fileName, position)
+			values
+			(#newPhotoType.assetPhotoType#,
+			#newPhotoType.bookID#,
+			'#newPhotoType.fileName#',
+			#newPhotoType.position#
+			)
+		</cfquery>
+		<cfreturn 1> 
+</cffunction>
+
+<cffunction name="deleteNewPhotoAsset" access="remote" returntype="Any" >
+	<cfargument name="id" type="numeric" required="true" >
+		<cfquery name="delete" datasource="eakinsMySQL" >
+			delete from newphotoassets
+			where id = #id#
+		</cfquery>
+	<cfreturn 1>
+</cffunction>
+	
+	
+<cffunction name="getAvailableHomePageFeatures" access="remote" returntype="Any" >
+	<cfquery name="features" datasource="eakinsMySQL" >
+		SELECT books.id, 
+	newphotoassets.assetPhotoType, 
+	books.title, 
+	newphotoassets.id AS photoID, 
+	newphotoassets.fileName, 
+	assetphototypes.assetPhotoType
+		FROM books INNER JOIN newphotoassets ON books.id = newphotoassets.bookID
+			 INNER JOIN assetphototypes ON newphotoassets.assetPhotoType = assetphototypes.id
+		WHERE newphotoassets.assetPhotoType=3
+	</cfquery>
+	<cfreturn features>
+</cffunction>	
+	
+	
+<cffunction name="insertHeroImage" access="remote" returntype="Any" >
+	<cfargument name="heroImage" type="any" required="true" >
+	`	<cfquery name="hero"  datasource="eakinsMySQL" >
+			insert into heroimages(
+				photoID,
+				position
+			)values(
+				#heroImage.photoID#,
+				#heroImage.position#
+			)
+		</cfquery>
+		<cfreturn 1>
+</cffunction>	
+
+<cffunction name="getHeroImages" access="remote" returntype="Any" >
+	<cfquery name="getHeroes" datasource="eakinsMySQL" >
+		SELECT heroimages.id, 
+	heroimages.photoID, 
+	heroimages.position, 
+	books.title
+	FROM books INNER JOIN newphotoassets ON books.id = newphotoassets.bookID
+		 INNER JOIN heroimages ON newphotoassets.id = heroimages.photoID
+	ORDER BY heroimages.position ASC
+	</cfquery>
+	<cfreturn getHeroes>
+</cffunction>
+
+<cffunction name="deleteFromHeroes" access="remote" returntype="Any">
+	<cfargument name="photoID" type="any" >
+		<cfquery name="delete" datasource="eakinsMySQL" >
+			delete from heroimages
+			where id = #photoID#
+		</cfquery>
+		<cfreturn 1>
+</cffunction>
+
+<cffunction name="getNewsForBook" access="remote" returntype="Any" >
+	<cfargument name="bookID" type="numeric" required="true" >
+	<cfquery name="news" datasource="eakinsMySQL" >
+		SELECT books.id, 
+	books.news
+	FROM books
+	where books.id = #bookID#
+	</cfquery>
+	<cfreturn news>
+</cffunction>	
 	
 </cfcomponent>
 

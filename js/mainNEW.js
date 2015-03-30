@@ -2,8 +2,7 @@ var dataHost = "http://eakinspress.com/data/webData.cfc";
 var testString = 'bohunk';
 
 
-
-function getNews(slug){
+function getRelatedItems(slug,cat){
 	
 	
 	$.ajax({
@@ -13,39 +12,6 @@ function getNews(slug){
             returnFormat: 'json',
             slug:slug
             
-        },
-        method: 'GET',
-        dataType: "json",
-        async: true,
-        success: function (d, r, o) {
-            workReturn = $.serializeCFJSON({
-                data: d
-            });
-            console.log(workReturn);
-
-
-			
-            var relatedAreaTemplateScript = $('#books-template').html();
-            relatedItems= Handlebars.compile(relatedAreaTemplateScript);
-            $('#newsArea').empty();
-            $('#newsArea').append(relatedItems(workReturn));
-           
-            
-        } 
-    });
- }   
-
-
-function getRelatedItems(slug,cat){
-	
-	
-	$.ajax({
-        url: dataHost,
-        data: {
-            method: 'getRelatedItemsForBookByCat',
-            returnFormat: 'json',
-            slug:slug,
-            cat:cat
         },
         method: 'GET',
         dataType: "json",
@@ -69,6 +35,38 @@ function getRelatedItems(slug,cat){
     });
  }   
 
+function getNews(slug){
+	
+	
+	$.ajax({
+        url: dataHost,
+        data: {
+            method: 'getRelatedItemsForBookByCat',
+            returnFormat: 'json',
+            slug:slug
+            
+        },
+        method: 'GET',
+        dataType: "json",
+        async: true,
+        success: function (d, r, o) {
+            workReturn = $.serializeCFJSON({
+                data: d
+            });
+            console.log(workReturn);
+
+
+			
+            var relatedAreaTemplateScript = $('#text-template').html();
+            relatedItems= Handlebars.compile(relatedAreaTemplateScript);
+            $('#relatedArea').empty();
+            $('#relatedArea').append(relatedItems(workReturn));
+           //$("#relatedArea").listview().listview('refresh');
+           //setLinkFormats(bookType); 
+            
+        } 
+    });
+ }   
 
 function getBooks(bookType){
 	clearSearch();
