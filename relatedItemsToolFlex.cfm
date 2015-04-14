@@ -7,7 +7,6 @@
 <cfscript>
 eakinsData= CreateObject("Component","data/webData");
 eakinsData.init();
-
 relatedItems = eakinsData.getNewsForBook(#slug#);
 books = eakinsData.getAllBooks();
 </cfscript>    

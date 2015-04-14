@@ -34,7 +34,7 @@
 	<!--[if lt IE 9]>
 		<script type="text/javascript" src="js/ie.js"></script>
 	<![endif]-->
-<cfparam name="slug" default="a-system-of-architectural-ornament">
+<cfparam name="slug" default="the-stravinsky-festival">
 <cfscript>
 eakinsData= CreateObject("Component","data/webData");
 eakinsData.init();
@@ -42,23 +42,7 @@ bookDetails = eakinsData.getBookDetails(#slug#);
 catDetails = eakinsData.getCategoriesForBook(#slug#);
 editions = eakinsData.getEditionsForBook(#slug#);
 spreads = eakinsData.getSpreadsForBook(#slug#);
-relatedItems = eakinsData.getRelatedItemsForBook(#slug#);
 </cfscript>
-<cfquery dbtype="query" name="reviews">
-SELECT relatedClass from relatedItems
-where relatedClass = 'review'	
-</cfquery>
-<cfquery dbtype="query" name="events">
-SELECT relatedClass from relatedItems
-where relatedClass = 'event'	
-</cfquery>
-<cfquery dbtype="query" name="resources">
-SELECT relatedClass from relatedItems
-where relatedClass = 'resource'	
-</cfquery>	
-<cfset numberOfReviews = #reviews.RecordCount#>
-<cfset numberOfEvents = #events.RecordCount#>
-<cfset numberOfResources = #resources.RecordCount#>
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<!-- set title of your site -->
@@ -85,19 +69,23 @@ where relatedClass = 'resource'
 </style>
 
 <script>
-/*	
-Snipcart.execute('config', 'allowed_shipping_methods', [
-    'usps-standard-post',
-    'usps-priority-mail-express-2-days',
-    'usps-priority-mail-2-day'
-]);	
-*/
 
+Snipcart.execute('config', 'allowed_shipping_methods', [
+    
+    'usps-priority-mail-2-day',
+    'usps-priority-mail-1-day',
+    'usps-standard-post',
+    'usps-first-class-mail'
+   
+]);	
+
+/*
 Snipcart.execute('config', 'allowed_shipping_methods', [ 
 'usps-priority-mail-1-day', 
-'usps-priority-mail-2-day' 
+'usps-priority-mail-express-2-days' ,
+'usps-priority-mail-express-2-day' ,
 ]);
-
+*/
 var cartViews = 0;
 
 Snipcart.execute('bind', 'shippingaddress.changed', function (address) {
@@ -125,10 +113,7 @@ Snipcart.execute('bind', 'page.change', function (page) {
 
 </script>		
 <!--- /snipcart --->
-
-<script>
-var thisSlug = '';	
-</script>	
+	
 </head>
 <body>
 	<!-- main container of all the page elements -->
@@ -242,8 +227,10 @@ var thisSlug = '';
 								<cfelse>
 								<li><a href="publications.cfm?view=photo">Photography</a></li>
 								</cfif>
-								</cfoutput>		
-
+								</cfoutput>
+								
+								
+								
 							</ul>
 						</nav>
 					</div>
@@ -276,7 +263,7 @@ var thisSlug = '';
 							    data-item-name="#editions.title#"
 							    data-item-price="#editions.price#"
 							    data-item-weight="#editions.weight#"
-							    data-item-url="http://eakinspress-org.securec75.ezhostingserver.com/book.cfm?slug=#slug#"
+							    data-item-url="http://www.eakinspress.com/book.cfm?slug=#slug#"
 							    data-item-description=""#editions.title#"">
 							    Add to Cart
 							</a>
@@ -285,6 +272,7 @@ var thisSlug = '';
 							</cfloop>
 							
 							</cfoutput>
+							
 						</section>
 					</div>
 				</div>
@@ -315,64 +303,6 @@ var thisSlug = '';
 				<a href="#" class="btn-next"><i class="icon-svg"></i></a>
 				<div class="pagination"></div>
 			</section>
-			<!-- boxes- -->
-			<cfif relatedItems.recordcount GT 0>
-			<section class="boxes">
-				<!-- tabs-area -->
-				<a name="related"></a>
-				<div class="tabs-area">
-					<div class="container">
-						<h1>RELATED MATERIALS</h1>
-							<!-- nav-holder -->
-							<div class="isotope-filter">
-								<div class="nav-holder filters">
-									<ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-										<li class="active" id="allCats"><a href="#"  class="show-all">All</a></li>
-										
-										<cfif reviews.RecordCount GT 0>
-										<li id="reviewCat"><a href="#" rel='review'>Reviews</a></li>
-										<cfelse>	
-										<li id="reviewCat"><a href="#" rel='review' class="emptyCat">Reviews</a></li>
-										</cfif>
-										
-										
-										
-										<cfif events.RecordCount GT 0>
-										<li id="eventCat"  ><a href="#" rel='event' >Events</a></li>
-										<cfelse>
-										<li id="eventCat"  ><a href="#" rel='event' class="emptyCat">Events</a></li>
-										</cfif>
-										
-										<cfif resources.RecordCount GT 0>
-											
-										<li id="resourceCat"><a href="#" rel='resource'  >Resources</a></li>
-										<cfelse>
-										<li id="resourceCat"><a href="#" rel='resource' class="emptyCat">Resources</a></li>
-										</cfif>
-									</ul>
-								</div>
-									<!-- box-holder- -->
-									<div class="sort-boxes">
-										<div class="box-holder sort-boxes-holder" id="relatedArea">
-											
-											<cfoutput query="relatedItems">
-											<!-- box-->
-											<a href="#link#">
-												<article class="box large sort-box" rel='#relatedClass#'>
-													<span class="category">#className#</span>
-													<span class="title">#title#</span>
-													<span class="source">#content#</span>	
-												</article>
-											</a>
-											<!-- box-->
-											</cfoutput>	
-										</div>	
-									</div>
-								</div>
-							</div>
-					</div>
-			</section>
-			</cfif>
 		</main>
 		<!-- footer of the page -->
 		<footer id="footer">
@@ -428,23 +358,11 @@ var thisSlug = '';
 	</script>
 	<script id="cart-content-text" type="text/template">
     <div class="custom-snipcart-footer-text">
-    <h2>US Customers</h2>
-    <p>
-        Please use your 5 digit zipcode without the 4 digit extension.
-  </p>
+    <h1 style="text-align:center">US Customers:</h1>
+    
+        <h2 style="text-align:center">Please use your 5 digit zipcode <i>without</i> the 4 digit extension.</h2>
+  
     </div>
-  </script>
-  <script>
-   $(document).ready(function(e) {
-	   //alert('doc ready');
-	   /*
-	   thisSlug = getParam('slug');
-	   if (thisSlug == ''){
-		   thisSlug = 'a-system-of-architectural-ornament';
-		   }
-	   getRelatedItems(thisSlug,99);
-	   */
-	   });
   </script>
 </body>
 </html>
