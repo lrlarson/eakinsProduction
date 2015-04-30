@@ -34,7 +34,7 @@
 	<!--[if lt IE 9]>
 		<script type="text/javascript" src="js/ie.js"></script>
 	<![endif]-->
-<cfparam name="slug" default="a-system-of-architectural-ornament">
+<cfparam name="slug" default="o-write-my-name">
 <cfscript>
 eakinsData= CreateObject("Component","data/webData");
 eakinsData.init();
@@ -42,7 +42,7 @@ bookDetails = eakinsData.getBookDetails(#slug#);
 catDetails = eakinsData.getCategoriesForBook(#slug#);
 editions = eakinsData.getEditionsForBook(#slug#);
 spreads = eakinsData.getSpreadsForBook(#slug#);
-relatedItems = eakinsData.getRelatedItemsForBook(#slug#);
+relatedItems = eakinsData.getPublishedRelatedItemsForBook(#slug#);
 </cfscript>
 <cfquery dbtype="query" name="reviews">
 SELECT relatedClass from relatedItems
@@ -357,13 +357,21 @@ var thisSlug = '';
 											
 											<cfoutput query="relatedItems">
 											<!-- box-->
-											<a href="#link#">
+											<cfif link NEQ ''>
+											<a href="#link#" target="_blank">
 												<article class="box large sort-box" rel='#relatedClass#'>
 													<span class="category">#className#</span>
 													<span class="title">#title#</span>
 													<span class="source">#content#</span>	
 												</article>
 											</a>
+											<cfelse>
+												<article class="box large sort-box" rel='#relatedClass#'>
+													<span class="category">#className#</span>
+													<span class="title">#title#</span>
+													<span class="source">#content#</span>	
+												</article>
+											</cfif>
 											<!-- box-->
 											</cfoutput>	
 										</div>	

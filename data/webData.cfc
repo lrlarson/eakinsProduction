@@ -41,10 +41,30 @@ SELECT relateditems.id,
 	relateditemclasses.relatedClass,
 	 relateditemclasses.className,
 	relateditemclasses.id AS itemClass, 
+	books.slug,
+	relateditems.publish
+FROM relateditems INNER JOIN relateditemclasses ON relateditems.relatedItemClass = relateditemclasses.id
+	 INNER JOIN books ON relateditems.book_id = books.id	
+	 WHERE books.slug = '#slug#' 
+	</cfquery>
+	<cfreturn relatedBooks>
+</cffunction>
+
+<cffunction name="getPublishedRelatedItemsForBook" access="remote" returntype="Any" >
+	<cfargument name="slug" type="string" required="true" >
+	<cfquery name="relatedBooks" datasource="eakinsWebUser">
+SELECT relateditems.id, 
+	relateditems.content, 
+	relateditems.book_id, 
+	relateditems.title,
+	relateditems.link, 
+	relateditemclasses.relatedClass,
+	 relateditemclasses.className,
+	relateditemclasses.id AS itemClass, 
 	books.slug
 FROM relateditems INNER JOIN relateditemclasses ON relateditems.relatedItemClass = relateditemclasses.id
 	 INNER JOIN books ON relateditems.book_id = books.id	
-	 WHERE books.slug = '#slug#'
+	 WHERE books.slug = '#slug#' and relateditems.publish = 1
 	</cfquery>
 	<cfreturn relatedBooks>
 </cffunction>

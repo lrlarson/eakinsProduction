@@ -277,7 +277,8 @@ SELECT relateditems.id,
 	relateditems.title, 
 	relateditemclasses.relatedClass, 
 	relateditemclasses.id as itemClass,
-	relateditems.link
+	relateditems.link,
+	relateditems.publish
 	FROM relateditems INNER JOIN relateditemclasses ON relateditems.relatedItemClass = relateditemclasses.id
 	WHERE relateditems.book_id = #book_ID#
 	</cfquery>

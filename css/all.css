@@ -1414,7 +1414,7 @@ a.cart:hover {
     width: 43%;
   }
 }
-.boxes .box:hover {
+a .box:hover {
   border-color: #89381d;
   text-decoration: none;
 }
