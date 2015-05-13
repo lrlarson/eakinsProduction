@@ -457,11 +457,48 @@ a:focus {
 #header .logo a:hover {
   text-decoration: none;
 }
+
+
+
+/* IE Hack */
+@media screen\0{
+	/*media all*/
+#header .logo .alignleft {
+    display: inline-block;
+    vertical-align: middle;
+    width: 70% !important;
+    
+}
+/*media all*/
+img.alignleft {
+    padding: 4px;
+    margin: 0px 7px 2px 0;
+    
+}
+
+/*media all*/
+#header .logo .icon-svg2 {
+    display: inline-block;
+    vertical-align: middle;
+    width: 112px !important;
+    margin: 0px 0px  0 0 !important;
+    float: left;
+	}
+}
+
 #header .logo .icon-svg2 {
   display: inline-block;
   vertical-align: middle;
   width: 55px;
-  margin: 3px 11px 0 0;
+  margin: 0px 11px 0 0;
+  float: left;
+}
+
+#header #ghostLogo .icon-svg2 {
+  display: inline-block;
+  vertical-align: middle;
+  width: 55px;
+  margin: -10px 11px 0 0;
   float: left;
 }
 @media screen and (max-width: 992px) {
@@ -1885,14 +1922,26 @@ a .box:hover {
   width: 100%;
 }
 /* post styles */
+
+.blog body,
+.blog #wrapper,
+.blog #main,
+.blog #header {
+  background: #FFF !important;
+}
+
+.blog .content img {
+   margin: 30px 0 30px;
+}
+
 .post {
-  background: #ffffff;
   overflow: hidden;
   color: #000000;
   font-size: 20px;
   font-size: 1.05263158em;
   line-height: 30px;
   line-height: 1.5em;
+  margin-bottom: 60px;
 }
 .post .holder {
   overflow: hidden;
@@ -1983,13 +2032,15 @@ a .box:hover {
   margin: -1px 0 0;
 }
 .post blockquote {
+  font-family: "adobe-text-pro", georgia, serif;
+  font-style: italic;
   border-left: 3px solid #89381d;
   padding: 0 0 0 39px;
-  margin: 0 0 32px -3px;
-  font-size: 22px;
+  margin: 30px 0 30px -3px;
   font-size: 1.1em;
-  line-height: 33px;
-  line-height: 1.5em;
+  line-height: 1.45em;
+  color: #975038;
+  letter-spacing: -.015em;
 }
 @media screen and (max-width: 767px) {
   .post blockquote {
@@ -2017,6 +2068,11 @@ a .box:hover {
 .post a:hover {
   text-decoration: none;
 }
+
+.post h1 a {
+    text-decoration: none;
+}
+
 /* carousel styles */
 .carousel {
   position: relative;
@@ -2879,4 +2935,33 @@ a .box:hover {
 .jcf-focus,
 .jcf-focus * {
   border-color: #f00 !important;
+}
+
+/**  Sumo Me (Social Media) **/
+
+a.sumome-share-client-share:last-child {
+  display: none !important;
+}
+
+a.sumome-share-client-share {
+  background-color: #deddda !important;
+  margin-bottom: 5px !important;
+}
+
+@media screen and (max-width: 500px) {
+    .sumome-share-client-wrapper.sumome-share-client-wrapper-mobile div.sumome-share-client-mobile .sumome-4 {
+        width: 15% !important;
+        margin: 0 auto !important;
+        padding: 0px !important;
+        
+    }
+}
+
+a.sumome-share-client-share:hover {
+    background-color: #89360A !important;
+}
+
+.sumome-share-client-wrapper span {
+    color: white;
+    display: none; 
 }

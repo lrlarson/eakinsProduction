@@ -36,6 +36,24 @@
 	<!--[if lt IE 9]>
 		<script type="text/javascript" src="js/ie.js"></script>
 	<![endif]-->
+    
+          <!-- Open Graph Meta Tags -->
+      <meta property="og:type" content="website"/>
+      <meta property="og:title" content="Eakins Press Foundation | Blog"/>
+      <meta property="og:description" content="For the advancement of literature and art through excellence of presentation to a broad public. Limited edition books and portfolios on photography, history, literature, ballet and art."/>
+      <meta property="og:site_name" content="Eakins Press Foundation | Blog"/>
+      <meta property="og:url" content="https://www.eakinspress.com/leslie_katz_and_appreciations.cfm"/>
+      <meta property="og:image" content="https://pbs.twimg.com/profile_images/564877411116793857/FFF3cXgt_400x400.jpeg"/>
+
+      <!-- Twitter Card Meta Tags -->
+      <meta name="twitter:card" content="summary"/>
+      <meta name="twitter:title" content="Eakins Press Foundation | Blog"/>
+      <meta name="twitter:description" content="For the advancement of literature and art through excellence of presentation to a broad public. Limited edition books and portfolios on photography, history, literature, ballet and art."/>
+      <meta name="twitter:image" content="https://pbs.twimg.com/profile_images/564877411116793857/FFF3cXgt_400x400.jpeg"/>
+      <meta name="twitter:site" content="@eakinspress"/>
+    
+     <script src="//load.sumome.com/" data-sumo-site-id="11be0b3abd38b378a2f1228d1d9ce1128ddc83df24ad056d375dd419420d1150" async="async"></script>
+    
 </head>
 <body>
 	<!-- main container of all the page elements -->
@@ -142,7 +160,8 @@
 									<p>Richard Benson is renowned as the aristocrat of the printed dot. His work is a subtle and relentless exploration of tonalities. He confirms authenticity by fanatical devotion to techniques of simulation that gratify the manifold hunger for illusion. But it is always with the precision of an observer who knows who things should look, not a magician, that he extends the horizons of the eye.</p>
 									
 									<h4>Howard Gralla</h4>
-									<p>Continuity is essential in publishing, as much from the perspective of design elegance as from the foundation of history. Howard Gralla, who has shaped the appearance and functionality of the books of the Eakins Press from his first remarkable contribution to our catalogue, <a href="book.cfm?slug=lincoln-kirstein-a-first-bibliography"><i>Lincoln Kirstein: A First Bibliography</i></A> in 1977 to the recent, 2012, <a href="book.cfm?slug=magicians-charlatans"><i>Magicians &amp; Charlatans</i></a> by Jed Perl, is effectively the anchor of the vision and design integrity of the Press. This phrase by Flaubert is a good description of Howard's dependable contribution to all that he touches: "The moral is not only a part of the esthetic; it is its condition foundationally."</p>
+									<p>Continuity is essential in publishing, as much from the perspective of design elegance as from the foundation of history. Howard Gralla, who has shaped the appearance and functionality of the books of the Eakins Press from his first remarkable contribution to our catalogue, <a href="book.cfm?slug=lincoln-kirstein-a-first-bibliography"><i>Lincoln Kirstein: A First Bibliography</i></a>
+								 	in 1977 to the recent, 2015, <a href="book.cfm?slug=O-write-my-name-Harlem-Heroes"><i>'O, Write My Name': American Portraits, Harlem Heroes</i></a>, photographs by Carl Van Vechten, is effectively the anchor of the vision and design integrity of the Press. This phrase by Flaubert is a good description of Howard's dependable contribution to all that he touches: "The moral is not only a part of the esthetic; it is its condition foundationally."</p>
 									
 									<h4>Harvey Simmonds</h4>
 									<p>To coordinate is to create. For example, when Harvey Simmonds (Brother Benedict) was chosen to lead the magnificent task of assembling a complete, detailed listing of every ballet George Balanchine devised during his protean career, everyone who knew him had complete confidence in his ability. In the process the staff he led found themselves in touch with the Universe. The entire world is Harvey's community and connecting it is his mission.</p>

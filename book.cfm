@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <head>
+	<cfparam name="slug" default="o-write-my-name">
 	<!-- set the encoding of your site -->
 	<meta charset="utf-8">
 	<!-- set the viewport width and initial-scale on mobile devices -->
@@ -34,7 +35,27 @@
 	<!--[if lt IE 9]>
 		<script type="text/javascript" src="js/ie.js"></script>
 	<![endif]-->
-<cfparam name="slug" default="o-write-my-name">
+    
+          <!-- Open Graph Meta Tags -->
+      <meta property="og:type" content="website"/>
+      <meta property="og:title" content="Eakins Press Foundation | Blog"/>
+      <meta property="og:description" content="For the advancement of literature and art through excellence of presentation to a broad public. Limited edition books and portfolios on photography, history, literature, ballet and art."/>
+      <meta property="og:site_name" content="Eakins Press Foundation | Blog"/>
+      <cfoutput>
+      <meta property="og:url" content="https://www.eakinspress.com/book.cfm?slug=#slug#"/>
+      </cfoutput>
+      <meta property="og:image" content="https://pbs.twimg.com/profile_images/564877411116793857/FFF3cXgt_400x400.jpeg"/>
+
+      <!-- Twitter Card Meta Tags -->
+      <meta name="twitter:card" content="summary"/>
+      <meta name="twitter:title" content="Eakins Press Foundation | Blog"/>
+      <meta name="twitter:description" content="For the advancement of literature and art through excellence of presentation to a broad public. Limited edition books and portfolios on photography, history, literature, ballet and art."/>
+      <meta name="twitter:image" content="https://pbs.twimg.com/profile_images/564877411116793857/FFF3cXgt_400x400.jpeg"/>
+      <meta name="twitter:site" content="@eakinspress"/>
+    
+     <script src="//load.sumome.com/" data-sumo-site-id="11be0b3abd38b378a2f1228d1d9ce1128ddc83df24ad056d375dd419420d1150" async="async"></script>
+    
+
 <cfscript>
 eakinsData= CreateObject("Component","data/webData");
 eakinsData.init();
@@ -76,7 +97,7 @@ where relatedClass = 'resource'
 <!--- snipcart   PRODUCTION--->
 <script type="text/javascript"   src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
-<script type="text/javascript"   id="snipcart"   src="https://app.snipcart.com/scripts/snipcart.js"   data-api-key="NWUxNTljZDYtOWNjZi00NGNkLWEyMTQtODdiMDQ4NmI0ODdl"></script> 
+<script type="text/javascript"   id="snipcart"   src="https://cdn.snipcart.com/scripts/snipcart.js"   data-api-key="NWUxNTljZDYtOWNjZi00NGNkLWEyMTQtODdiMDQ4NmI0ODdl"></script> 
 <link type="text/css"   id="snipcart-theme"   href="https://app.snipcart.com/themes/base/snipcart.css"   rel="stylesheet" />
 <style>
 .snipcart-checkout-container {

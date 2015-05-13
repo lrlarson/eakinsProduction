@@ -36,6 +36,22 @@
 	<!--[if lt IE 9]>
 		<script type="text/javascript" src="js/ie.js"></script>
 	<![endif]-->
+    
+          <!-- Open Graph Meta Tags -->
+      <meta property="og:type" content="website"/>
+      <meta property="og:title" content="Eakins Press Foundation | Blog"/>
+      <meta property="og:description" content="For the advancement of literature and art through excellence of presentation to a broad public. Limited edition books and portfolios on photography, history, literature, ballet and art."/>
+      <meta property="og:site_name" content="Eakins Press Foundation | Blog"/>
+      <meta property="og:url" content="https://www.eakinspress.com/"/>
+      <meta property="og:image" content="https://pbs.twimg.com/profile_images/564877411116793857/FFF3cXgt_400x400.jpeg"/>
+
+      <!-- Twitter Card Meta Tags -->
+      <meta name="twitter:card" content="summary"/>
+      <meta name="twitter:title" content="Eakins Press Foundation | Blog"/>
+      <meta name="twitter:description" content="For the advancement of literature and art through excellence of presentation to a broad public. Limited edition books and portfolios on photography, history, literature, ballet and art."/>
+      <meta name="twitter:image" content="https://pbs.twimg.com/profile_images/564877411116793857/FFF3cXgt_400x400.jpeg"/>
+      <meta name="twitter:site" content="@eakinspress"/>
+    
 <cfparam name="view" default="3">	
 
 <cfscript>
