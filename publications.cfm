@@ -93,7 +93,7 @@
 										<li class="photoNav"><a href="#" onclick="getBooks(2);">Photography</a></li>
 									</ul>
 								</li>
-								<!--<li><a href="http://blog.eakinspress.com">Blog</a></li>-->
+								<li><a href="http://blog.eakinspress.com">Blog</a></li>
 								<li class="dropdown">
 									<a href="about_the_press.cfm" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About the Press</a>
 									<ul class="dropdown-menu" role="menu">
