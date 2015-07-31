@@ -161,6 +161,11 @@ img.aligncenter { display: block; margin-left: auto; margin-right: auto; }
   width: 40px;
   height: 40px;
 }
+.icon-newsletter:before {
+  content: url('../images/icon_newsletter.svg');
+  width: 40px;
+  height: 40px;
+}
 @-webkit-viewport {
   width: device-width;
 }
@@ -1001,7 +1006,7 @@ img.alignleft {
 .info-area .price-detail {
   overflow: hidden;
   border: 1px solid #ae7664;
-  padding: 20px 0;
+  padding: 20px 15px;
   margin: 6px 0 20px;
   text-align: center;
   max-width: 135px;
@@ -1047,7 +1052,7 @@ a.cart {
   color: #ffffff;
   text-transform: uppercase;
   padding: 16px 12px;
-  margin-bottom: -20px !important;
+  margin: 0 -20px -20px -20px !important;
   letter-spacing: 1px;
   background: #89381d;
   font-family: 'franklingothicbookcregular', sans-serif;
@@ -1061,6 +1066,12 @@ a.cart:hover {
   text-decoration: none;
   color: #fff;
   background: #000 !important;
+}
+@media screen and (max-width: 767px) {
+	.info-area .price-detail .cart,
+.snipcart-add-item button,
+a.cart {
+  margin: 0 !important; }
 }
 @media screen and (max-width: 767px) {
   .info-area .price-detail .cart,
@@ -1106,7 +1117,6 @@ a.cart:hover {
   font-family: "franklin-gothic-urw-cond", sans-serif;
   text-transform: uppercase;
   position: relative;
-  z-index: 9;
 }
 .detail .container {
   text-align: left;
@@ -1241,7 +1251,7 @@ a.cart:hover {
 .slideshow .btn-next,
 .slideshow .btn-prev {
   position: absolute;
-  left: 20px;
+  left: 70px;
   top: 50%;
   border: 1px solid #89360a;
   width: 42px;
@@ -1287,7 +1297,7 @@ a.cart:hover {
 }
 .slideshow .btn-next {
   left: auto;
-  right: 20px;
+  right: 70px;
 }
 .slideshow .btn-next .icon-svg {
   -moz-transform: rotate(0deg);
@@ -1476,12 +1486,14 @@ a .box:hover {
   font-size: 22px;
   color: #000;
   margin-top: 25px;
+  font-style: normal;
 }
 .source {
   position: relative;
   display: block;
   font-size: 16px;
   color: #89381D;
+  font-style: normal;
 }
 .date {
   position: relative;
@@ -2964,4 +2976,40 @@ a.sumome-share-client-share:hover {
 .sumome-share-client-wrapper span {
     color: white;
     display: none; 
+}
+
+.sumome-share-client-wrapper.sumome-share-client-wrapper-right-page {
+	top: 34% !important;
+	margin-top: 2px !important;
+}
+
+#cart a {
+	position: fixed;
+	right: 0;
+	top: 24%;
+	font-family: "franklin-gothic-urw-cond", sans-serif;
+	font-size: 13px;
+	width: 50px;
+	height: 75px;
+	padding: 15px;
+	text-align: center;
+	background-color: #DEDDDA;
+	text-decoration: none;
+	color: #fff;
+	  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+	z-index: 1;
+}
+
+#cart a:hover {
+	background-color: #89381D;
+}
+
+#cart a:before {
+  content: url('../images/icon_cart.svg');
+  width: 40px;
+  height: 40px;
 }

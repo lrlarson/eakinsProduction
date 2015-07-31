@@ -332,13 +332,15 @@ where  relateditems.id = #relatedItem.id#
 			book_id,
 			relatedItemClass,
 			title,
-			link
+			link,
+			publish
 			)values(
 			'#newItem.content#',
 			#newItem.book_id#,
 			#newItem.itemClass#,
 			'#newItem.title#',
-			'#newItem.link#'
+			'#newItem.link#',
+			'#newItem.publish#'
 			)
 	</cfquery>
 	<cfreturn 1>

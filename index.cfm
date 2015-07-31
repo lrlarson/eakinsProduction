@@ -39,15 +39,15 @@
     
           <!-- Open Graph Meta Tags -->
       <meta property="og:type" content="website"/>
-      <meta property="og:title" content="Eakins Press Foundation | Blog"/>
+      <meta property="og:title" content="Eakins Press Foundation"/>
       <meta property="og:description" content="For the advancement of literature and art through excellence of presentation to a broad public. Limited edition books and portfolios on photography, history, literature, ballet and art."/>
-      <meta property="og:site_name" content="Eakins Press Foundation | Blog"/>
+      <meta property="og:site_name" content="Eakins Press Foundation"/>
       <meta property="og:url" content="https://www.eakinspress.com/"/>
       <meta property="og:image" content="https://pbs.twimg.com/profile_images/564877411116793857/FFF3cXgt_400x400.jpeg"/>
 
       <!-- Twitter Card Meta Tags -->
       <meta name="twitter:card" content="summary"/>
-      <meta name="twitter:title" content="Eakins Press Foundation | Blog"/>
+      <meta name="twitter:title" content="Eakins Press Foundation"/>
       <meta name="twitter:description" content="For the advancement of literature and art through excellence of presentation to a broad public. Limited edition books and portfolios on photography, history, literature, ballet and art."/>
       <meta name="twitter:image" content="https://pbs.twimg.com/profile_images/564877411116793857/FFF3cXgt_400x400.jpeg"/>
       <meta name="twitter:site" content="@eakinspress"/>
@@ -220,6 +220,7 @@ heroes = eakinsData.getHeroes();
 						<li><a href="https://www.facebook.com/eakinspress" target="_blank"><i class="icon-facebook"></i></a></li>
 						<li><a href="https://twitter.com/eakinspress" target="_blank"><i class="icon-twitter"></i></a></li>
 						<li><a href="http://instagram.com/eakinspress" target="_blank"><i class="icon-instragram"></i></a></li>
+						<li><a href="http://eakinspress.us10.list-manage.com/subscribe?u=a0a7c1f8e5836d45e7759c38d&id=81ee6af288" target="_blank"><i class="icon-newsletter"></i></a></li>
 					</ul>
 				</div>
 				<span class="copyright">&copy;2015 Eakins Press Foundation. <a href="terms_and_conditions.cfm">Terms and Conditions</a>. Site by <a href="http://www.larsonassoc.org">Larson Associates.</a></span>
@@ -229,6 +230,61 @@ heroes = eakinsData.getHeroes();
 	<div class="js-overlay"></div>
 	<!-- include jQuery library -->
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<!--- snipcart   PRODUCTION--->
+<script type="text/javascript"   id="snipcart"   src="https://cdn.snipcart.com/scripts/snipcart.js"   data-api-key="NWUxNTljZDYtOWNjZi00NGNkLWEyMTQtODdiMDQ4NmI0ODdl"></script> 
+<script>
+  Snipcart.execute('config', 'show_continue_shopping', true);
+</script>
+
+
+<link type="text/css"   id="snipcart-theme"   href="https://app.snipcart.com/themes/base/snipcart.css"   rel="stylesheet" />
+<style>
+.snipcart-checkout-container {
+   z-index: 9999;
+}	
+</style>
+
+<script>
+/*	
+Snipcart.execute('config', 'allowed_shipping_methods', [
+    'usps-standard-post',
+    'usps-priority-mail-express-2-days',
+    'usps-priority-mail-2-day'
+]);	
+*/
+
+Snipcart.execute('config', 'allowed_shipping_methods', [ 
+'usps-priority-mail-1-day', 
+'usps-priority-mail-2-day' 
+]);
+
+var cartViews = 0;
+
+Snipcart.execute('bind', 'shippingaddress.changed', function (address) {
+    console.log(address);
+})
+
+Snipcart.execute('bind', 'cart.ready', function (data) {
+    console.log(data);
+});
+
+Snipcart.execute('bind', 'page.change', function (page) {
+    console.log(page);
+    if ((page == 'billing-address' || page == 'shipping-address') && (cartViews == 0)){
+	    cartViews ++;
+	    console.log('script triggered');
+	    var html = $("#cart-content-text").html();
+		$(html).insertBefore($("#snipcart-footer"));  
+    }else{
+	   if (!(page == 'billing-address' || page == 'shipping-address')){
+		   var html = '';
+		
+	   } 
+    }
+});	
+
+</script>		
+<!--- /snipcart --->
 	<script type="text/javascript">window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
 	<script src="js/bootstrap.min.js"></script>
 	<!-- include custom JavaScript -->

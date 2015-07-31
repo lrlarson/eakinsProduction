@@ -161,6 +161,7 @@
 						<li><a href="https://www.facebook.com/eakinspress" target="_blank"><i class="icon-facebook"></i></a></li>
 						<li><a href="https://twitter.com/eakinspress" target="_blank"><i class="icon-twitter"></i></a></li>
 						<li><a href="http://instagram.com/eakinspress" target="_blank"><i class="icon-instragram"></i></a></li>
+						<li><a href="http://eakinspress.us10.list-manage.com/subscribe?u=a0a7c1f8e5836d45e7759c38d&id=81ee6af288" target="_blank"><i class="icon-newsletter"></i></a></li>
 					</ul>
 				</div>
 				<span class="copyright">&copy;2015 Eakins Press Foundation. <a href="terms_and_conditions.cfm">Terms and Conditions</a>. Site by <a href="http://www.larsonassoc.org">Larson Associates.</a></span>

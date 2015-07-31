@@ -38,9 +38,9 @@
     
           <!-- Open Graph Meta Tags -->
       <meta property="og:type" content="website"/>
-      <meta property="og:title" content="Eakins Press Foundation | Blog"/>
+      <meta property="og:title" content="Eakins Press Foundation"/>
       <meta property="og:description" content="For the advancement of literature and art through excellence of presentation to a broad public. Limited edition books and portfolios on photography, history, literature, ballet and art."/>
-      <meta property="og:site_name" content="Eakins Press Foundation | Blog"/>
+      <meta property="og:site_name" content="Eakins Press Foundation"/>
       <cfoutput>
       <meta property="og:url" content="https://www.eakinspress.com/book.cfm?slug=#slug#"/>
       </cfoutput>
@@ -48,7 +48,7 @@
 
       <!-- Twitter Card Meta Tags -->
       <meta name="twitter:card" content="summary"/>
-      <meta name="twitter:title" content="Eakins Press Foundation | Blog"/>
+      <meta name="twitter:title" content="Eakins Press Foundation"/>
       <meta name="twitter:description" content="For the advancement of literature and art through excellence of presentation to a broad public. Limited edition books and portfolios on photography, history, literature, ballet and art."/>
       <meta name="twitter:image" content="https://pbs.twimg.com/profile_images/564877411116793857/FFF3cXgt_400x400.jpeg"/>
       <meta name="twitter:site" content="@eakinspress"/>
@@ -94,10 +94,15 @@ where relatedClass = 'resource'
 	
 
 
+
 <!--- snipcart   PRODUCTION--->
 <script type="text/javascript"   src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
 <script type="text/javascript"   id="snipcart"   src="https://cdn.snipcart.com/scripts/snipcart.js"   data-api-key="NWUxNTljZDYtOWNjZi00NGNkLWEyMTQtODdiMDQ4NmI0ODdl"></script> 
+<script>
+  Snipcart.execute('config', 'show_continue_shopping', true);
+</script>
+
+
 <link type="text/css"   id="snipcart-theme"   href="https://app.snipcart.com/themes/base/snipcart.css"   rel="stylesheet" />
 <style>
 .snipcart-checkout-container {
@@ -204,6 +209,10 @@ var thisSlug = '';
 				</nav>
 			</div>
 		</header>
+		
+		<div id="cart" class="snipcart-summary"><a href="#" class="snipcart-checkout"><span class="snipcart-total-items"></a></span></div>
+		
+		
 		<!-- contain main informative part of the site -->
 		<main id="main" role="main">
 			<div class="container info-area">
@@ -306,6 +315,9 @@ var thisSlug = '';
 							</cfloop>
 							
 							</cfoutput>
+							<!---
+							<a href="#" class="snipcart-checkout">Click here to checkout</a>
+							--->
 						</section>
 					</div>
 				</div>
@@ -424,6 +436,7 @@ var thisSlug = '';
 						<li><a href="https://www.facebook.com/eakinspress" target="_blank"><i class="icon-facebook"></i></a></li>
 						<li><a href="https://twitter.com/eakinspress" target="_blank"><i class="icon-twitter"></i></a></li>
 						<li><a href="http://instagram.com/eakinspress" target="_blank"><i class="icon-instragram"></i></a></li>
+						<li><a href="http://eakinspress.us10.list-manage.com/subscribe?u=a0a7c1f8e5836d45e7759c38d&id=81ee6af288" target="_blank"><i class="icon-newsletter"></i></a></li>
 					</ul>
 				</div>
 				<span class="copyright">&copy;2015 Eakins Press Foundation. <a href="terms_and_conditions.cfm">Terms and Conditions</a>. Site by <a href="http://www.larsonassoc.org">Larson Associates.</a></span>

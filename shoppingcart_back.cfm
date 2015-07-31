@@ -1,12 +1,11 @@
 <!doctype html>
 <html>
 <head>
+	<cfparam name="slug" default="o-write-my-name">
 	<!-- set the encoding of your site -->
 	<meta charset="utf-8">
 	<!-- set the viewport width and initial-scale on mobile devices -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<!-- set title of your site -->
-	<title>Eakins Press Foundation :: Support the Press</title>
 	<!-- meta data -->
 	<meta name="description" content="For the advancement of literature and art through excellence of presentation to a broad public. Limited edition books and portfolios on photography, history, literature, ballet and art.">
 	<meta name="keywords" content="eakins press foundation, publishing, publisher, publications, books, art, architecture, dance, music, literature, photography, new york, thomas eakins, leslie george katz, peter kayafas">
@@ -36,13 +35,15 @@
 	<!--[if lt IE 9]>
 		<script type="text/javascript" src="js/ie.js"></script>
 	<![endif]-->
-
-      <!-- Open Graph Meta Tags -->
+    
+          <!-- Open Graph Meta Tags -->
       <meta property="og:type" content="website"/>
       <meta property="og:title" content="Eakins Press Foundation"/>
       <meta property="og:description" content="For the advancement of literature and art through excellence of presentation to a broad public. Limited edition books and portfolios on photography, history, literature, ballet and art."/>
       <meta property="og:site_name" content="Eakins Press Foundation"/>
-      <meta property="og:url" content="https://www.eakinspress.com/support_the_press.cfm"/>
+      <cfoutput>
+      <meta property="og:url" content="https://www.eakinspress.com/book.cfm?slug=#slug#"/>
+      </cfoutput>
       <meta property="og:image" content="https://pbs.twimg.com/profile_images/564877411116793857/FFF3cXgt_400x400.jpeg"/>
 
       <!-- Twitter Card Meta Tags -->
@@ -53,16 +54,53 @@
       <meta name="twitter:site" content="@eakinspress"/>
     
      <script src="//load.sumome.com/" data-sumo-site-id="11be0b3abd38b378a2f1228d1d9ce1128ddc83df24ad056d375dd419420d1150" async="async"></script>
-	 
-	 <!--- snipcart   PRODUCTION--->
+    
+
+<cfscript>
+eakinsData= CreateObject("Component","data/webData");
+eakinsData.init();
+bookDetails = eakinsData.getBookDetails(#slug#);
+catDetails = eakinsData.getCategoriesForBook(#slug#);
+editions = eakinsData.getEditionsForBook(#slug#);
+spreads = eakinsData.getSpreadsForBook(#slug#);
+relatedItems = eakinsData.getPublishedRelatedItemsForBook(#slug#);
+</cfscript>
+<cfquery dbtype="query" name="reviews">
+SELECT relatedClass from relatedItems
+where relatedClass = 'review'	
+</cfquery>
+<cfquery dbtype="query" name="events">
+SELECT relatedClass from relatedItems
+where relatedClass = 'event'	
+</cfquery>
+<cfquery dbtype="query" name="resources">
+SELECT relatedClass from relatedItems
+where relatedClass = 'resource'	
+</cfquery>	
+<cfset numberOfReviews = #reviews.RecordCount#>
+<cfset numberOfEvents = #events.RecordCount#>
+<cfset numberOfResources = #resources.RecordCount#>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<!-- set title of your site -->
+	<title><cfoutput>Eakins Press Foundation :: #bookDetails.title#</cfoutput></title>
+	<!-- include the site stylesheets -->
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.css">
+	<link href="css/all.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/js.css" rel="stylesheet" type="text/css" media="all" />
+	<!--[if lt IE 9]>
+		<script type="text/javascript" src="js/ie.js"></script>
+	<![endif]-->
+	
+
+
+<!--- snipcart   PRODUCTION--->
 <script type="text/javascript"   src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
 <script type="text/javascript"   id="snipcart"   src="https://cdn.snipcart.com/scripts/snipcart.js"   data-api-key="NWUxNTljZDYtOWNjZi00NGNkLWEyMTQtODdiMDQ4NmI0ODdl"></script> 
 <script>
   Snipcart.execute('config', 'show_continue_shopping', true);
 </script>
-
-
 <link type="text/css"   id="snipcart-theme"   href="https://app.snipcart.com/themes/base/snipcart.css"   rel="stylesheet" />
 <style>
 .snipcart-checkout-container {
@@ -111,10 +149,14 @@ Snipcart.execute('bind', 'page.change', function (page) {
 
 </script>		
 <!--- /snipcart --->
+
+<script>
+var thisSlug = '';	
+</script>	
 </head>
 <body>
 	<!-- main container of all the page elements -->
-	<div id="wrapper" class="about">
+	<div id="wrapper" class="single">
 		<!-- header of the page -->
 		<header id="header">
 			<div class="container">
@@ -140,7 +182,7 @@ Snipcart.execute('bind', 'page.change', function (page) {
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav">
-								<li class="dropdown">
+								<li class="dropdown active">
 									<a href="publications.cfm" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Publications </a>
 									<ul class="dropdown-menu" role="menu">
 										<li><a href="publications.cfm?view=art">Art &amp; Architecture</a></li>
@@ -151,96 +193,223 @@ Snipcart.execute('bind', 'page.change', function (page) {
 								</li>
 								<li><a href="http://blog.eakinspress.com">Blog</a></li>
 								<li class="dropdown">
-									<a href="about_the_press.cfm" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About the Press</a>
+									<a href="about_the_press" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About the Press</a>
 									<ul class="dropdown-menu" role="menu">
 										<li><a href="about_the_press.cfm">Overview</a></li>
 										<li><a href="history_of_the_press.cfm">History of the Press</a></li>
 										<li><a href="leslie_katz_and_appreciations.cfm">Leslie Katz &amp; <br>Appreciations</a></li>
 									</ul>
 								</li>
-								<li class="active"><a href="support_the_press.cfm">Support the Press</a></li>
+								<li><a href="support_the_press.cfm">Support the Press</a></li>
 							</ul>
 						</div><!-- /.navbar-collapse -->
 					</div><!-- /.container-fluid -->
 				</nav>
 			</div>
 		</header>
-		<!---
 		<div id="cart" class="snipcart-summary"><a href="#" class="snipcart-checkout"><span class="snipcart-total-items"></a></span></div>
-		--->
+		
 		<!-- contain main informative part of the site -->
 		<main id="main" role="main">
-			<!-- main carousel of the page -->
-			<section class="content-area">
-				<div class="container">
-					<div class="row">
-						<div class="col-sm-3 subnav">
-							<nav class="left-nav">
-							<ul id="tabs" class="nav nav-tabs">
-								<li class="active"><a href="support_the_press.cfm">Support the Press</a></li>
+			<div class="container info-area">
+				<div class="row">
+					<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+						<nav class="left-nav">
+							<ul>
+								<cfoutput query="catDetails">
+								<cfif #catID[1]# EQ 5 OR #catID[2]# EQ 5 >
+								<cfset dance = 'true'>
+								<cfelse>
+								<cfset dance = 'false'>	
+								</cfif>
+								
+								<cfif #catID[1]# EQ 2 OR #catID[2]# EQ 2 >
+								<cfset photo = 'true'>
+								<cfelse>
+								<cfset photo = 'false'>	
+								</cfif>	
+								
+								
+								<cfif #catID[1]# EQ 3 OR #catID[2]# EQ 3 >
+								<cfset art = 'true'>
+								<cfelse>
+								<cfset art = 'false'>	
+								</cfif>	
+									
+								
+								<cfif #catID[1]# EQ 4 OR #catID[2]# EQ 4 >
+								<cfset lit = 'true'>
+								<cfelse>
+								<cfset lit = 'false'>	
+								</cfif>	
+								</cfoutput>	
+								
+								<cfoutput> 
+								<cfif art EQ 'true'>
+								<li class="active"><a href="publications.cfm?view=art">Art &amp; Architecture</a></li>
+								<cfelse>
+								<li><a href="publications.cfm?view=art">Art &amp; Architecture</a></li>
+								</cfif>	
+								
+								<cfif dance EQ 'true'>
+								<li class="active"><a href="publications.cfm?view=dance">Dance &amp; Music</a></li>
+								<cfelse>
+								<li><a href="publications.cfm?view=dance">Dance &amp; Music</a></li>
+								</cfif>
+								
+								<cfif lit EQ 'true'>
+								<li class="active"><a href="publications.cfm?view=lit">Literature</a></li>
+								<cfelse>
+								<li><a href="publications.cfm?view=lit">Literature</a></li>
+								</cfif>
+								
+								<cfif photo EQ 'true'>
+								<li class="active"><a href="publications.cfm?view=photo">Photography</a></li>
+								<cfelse>
+								<li><a href="publications.cfm?view=photo">Photography</a></li>
+								</cfif>
+								</cfoutput>		
+
 							</ul>
-							</nav>
-						</div>	
-					<div class="col-sm-9">
-								<div class="content">
-
-									<div class="aligncenter">
-										<img src="images/support_the_press.jpg" alt="Support the Press"><br><br>
-										<a href="#" class="button snipcart-add-item" 
-										data-item-id="gift"
-										data-item-name="tax-deductible donation"
-										data-item-price="50.00"
-										data-item-url="http://eakinspress-org.securec75.ezhostingserver.com/support_the_press.cfm"	
-										data-item-shippable="false"
-										data-item-taxable="false"
-										data-item-custom2-name="Amount"
-										data-item-custom2-options="$50|$25[-25.00]|$100[+50.00]|$500[+450.00]">
-										Support the Press
-										</a>
-									</div>
-
-									<p>The Eakins Press Foundation is a not-for-profit charitable foundation organized under the laws of the State of New York in 1974 and recognized by the Internal Revenue Service (Tax Exempt Foundation Number M-74-EO-752). The success of its programs is fundamentally dependent upon the generosity of its supporters. Funding from individuals and institutions is used entirely for new publications and related educational programming.</p> 
-
-									<p>All gifts are fully tax-deductible. <a href="#" 
-										class="snipcart-add-item" 
-										data-item-id="gift"
-										data-item-name="tax-deductible donation"
-										data-item-price="50.00"
-										data-item-url="http://eakinspress-org.securec75.ezhostingserver.com/support_the_press.cfm"	
-										data-item-shippable="false"
-										data-item-taxable="false"
-										data-item-custom2-name="Amount"
-										data-item-custom2-options="$50|$25[-25.00]|$100[+50.00]|$500[+450.00]|$1000[+950.00]">
-										Click here to make a tax-deductible donation</a>.</p>
-
-									<p>For specific questions about supporting the Eakins Press Foundation, please feel free to <a href="mailto:&#105;&#110;&#102;&#111;&#064;&#101;&#097;&#107;&#105;&#110;&#115;&#112;&#114;&#101;&#115;&#115;&#046;&#099;&#111;&#109;">contact us</a>.</p>
-
-									<p>Past support from the following institutions is gratefully acknowledged.</p>
-
-									<ul>
-										<li>Alliance for the Arts</li>
-										<li>Arch Specialty Insurance</li>
-										<li>Bari Lipp Foundation</li>
-										<li>Brown Foundation</li>
-										<li>The Ford Foundation</li>
-										<li>Furthermore</li>
-										<li>Gladys Krieble Delmas Foundation</li>
-										<li>J.M. Kaplan Fund</li>
-										<li>Jane & Leslie Katz Charitable Trust</li>
-										<li>Joseph E. Seagram & Sons</li>
-										<li>Lassalle Fund</li>
-										<li>Lila Acheson Wallace Fund</li>
-										<li>Morris & Alma Schapiro Fund</li>
-										<li>National Endowment for the Arts</li>
-										<li>The Jerome Robbins Foundation</li>
-										<li>The Statesman Foundation</li>
-									</ul>
-
-								</div></div>
+						</nav>
+					</div>
+					<div class="col-lg-10 col-md-9 col-sm-9 col-xs-12">
+						<section class="content">
+							<div class="textarea">
+								<cfoutput>
+								<h1>#bookDetails.title#</h1>
+								<h2>#bookDetails.subtitle#</h2>
+								<h3>#bookDetails.credits#</h3>
+								<h4>#bookDetails.year#</h4>
+								<p>#bookDetails.long_description#</p>
+								<span class="product-id">#bookDetails.isbn#</span>
+							</div>
+							<cfloop query="editions">
+							<div class="price-detail">
+								#editions.format# <br />
+								<cfif #editions.out_of_print# EQ 1 OR #editions.not_for_sale# EQ 1>
+									This edition is out of print
+								<cfelse>
+								<!--- old buy link	
+								<h4>$#editions.price#</h4>
+								<a href="##" class="cart">ADD TO CART</a>
+								</cfif>
+								--->
+								<h4>$#editions.price#</h4>
+							<a href="##"
+							    class="snipcart-add-item cart"
+							    data-item-id="#editions.id#"
+							    data-item-name="#editions.title#"
+							    data-item-price="#editions.price#"
+							    data-item-weight="#editions.weight#"
+							    data-item-url="http://eakinspress-org.securec75.ezhostingserver.com/book.cfm?slug=#slug#"
+							    data-item-description=""#editions.title#"">
+							    Add to Cart
+							</a>
+							</cfif>
+								</div>
+							</cfloop>
+							
+							</cfoutput>
+							<!---
+							<a href="#" class="snipcart-checkout">Click here to checkout</a>
+							--->
+						</section>
 					</div>
 				</div>
+			</div>
+			<div class="detail">
+				<div class="container">
+					<div class="row">
+						<cfoutput>
+						<h2>#bookDetails.colophon#</h2>
+						<h2 class="black">#bookDetails.specs#</h2>
+						</cfoutput>
+					</div>
 				</div>
+			</div>
+			<section class="slideshow">
+				<div class="mask">
+					<div class="slideset">
+						<cfoutput query="spreads">						
+							<div class="slide">
+							<img src="images/publications/spreadsCompressed/#spreads.fileName#" alt="Image Description">
+						</div>
+						</cfoutput>
+						<!---- end of query ---->
+						
+					</div>
 				</div>
+				<a href="#" class="btn-prev"><i class="icon-svg"></i></a>
+				<a href="#" class="btn-next"><i class="icon-svg"></i></a>
+				<div class="pagination"></div>
+			</section>
+			<!-- boxes- -->
+			<cfif relatedItems.recordcount GT 0>
+			<section class="boxes">
+				<!-- tabs-area -->
+				<a name="related"></a>
+				<div class="tabs-area">
+					<div class="container">
+						<h1>RELATED MATERIALS</h1>
+							<!-- nav-holder -->
+							<div class="isotope-filter">
+								<div class="nav-holder filters">
+									<ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+										<li class="active" id="allCats"><a href="#"  class="show-all">All</a></li>
+										
+										<cfif reviews.RecordCount GT 0>
+										<li id="reviewCat"><a href="#" rel='review'>Reviews</a></li>
+										<cfelse>	
+										<li id="reviewCat"><a href="#" rel='review' class="emptyCat">Reviews</a></li>
+										</cfif>
+										
+										
+										
+										<cfif events.RecordCount GT 0>
+										<li id="eventCat"  ><a href="#" rel='event' >Events</a></li>
+										<cfelse>
+										<li id="eventCat"  ><a href="#" rel='event' class="emptyCat">Events</a></li>
+										</cfif>
+										
+										<cfif resources.RecordCount GT 0>
+											
+										<li id="resourceCat"><a href="#" rel='resource'  >Resources</a></li>
+										<cfelse>
+										<li id="resourceCat"><a href="#" rel='resource' class="emptyCat">Resources</a></li>
+										</cfif>
+									</ul>
+								</div>
+									<!-- box-holder- -->
+									<div class="sort-boxes">
+										<div class="box-holder sort-boxes-holder" id="relatedArea">
+											
+											<cfoutput query="relatedItems">
+											<!-- box-->
+											<cfif link NEQ ''>
+											<a href="#link#" target="_blank">
+												<article class="box large sort-box" rel='#relatedClass#'>
+													<span class="category">#className#</span>
+													<span class="title">#title#</span>
+													<span class="source">#content#</span>	
+												</article>
+											</a>
+											<cfelse>
+												<article class="box large sort-box" rel='#relatedClass#'>
+													<span class="category">#className#</span>
+													<span class="title">#title#</span>
+													<span class="source">#content#</span>	
+												</article>
+											</cfif>
+											<!-- box-->
+											</cfoutput>	
+										</div>	
+									</div>
+								</div>
+							</div>
+					</div>
+			</section>
+			</cfif>
 		</main>
 		<!-- footer of the page -->
 		<footer id="footer">
@@ -263,7 +432,6 @@ Snipcart.execute('bind', 'page.change', function (page) {
 						<li><a href="https://www.facebook.com/eakinspress" target="_blank"><i class="icon-facebook"></i></a></li>
 						<li><a href="https://twitter.com/eakinspress" target="_blank"><i class="icon-twitter"></i></a></li>
 						<li><a href="http://instagram.com/eakinspress" target="_blank"><i class="icon-instragram"></i></a></li>
-						<li><a href="http://eakinspress.us10.list-manage.com/subscribe?u=a0a7c1f8e5836d45e7759c38d&id=81ee6af288" target="_blank"><i class="icon-newsletter"></i></a></li>
 					</ul>
 				</div>
 				<span class="copyright">&copy;2015 Eakins Press Foundation. <a href="terms_and_conditions.cfm">Terms and Conditions</a>. Site by <a href="http://www.larsonassoc.org">Larson Associates.</a></span>
@@ -273,27 +441,14 @@ Snipcart.execute('bind', 'page.change', function (page) {
 	<div class="js-overlay"></div>
 	<!-- include jQuery library -->
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<!---
 	<script type="text/javascript">window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
-	--->
-	<!--- snipcart   TEST--->	
-
-<!---
-<script type="text/javascript"   id="snipcart"   src="https://cdn.snipcart.com/scripts/snipcart.js"   data-api-key="NWUxNTljZDYtOWNjZi00NGNkLWEyMTQtODdiMDQ4NmI0ODdl"></script> 
-<link type="text/css"   id="snipcart-theme"   href="https://cdn.snipcart.com/themes/base/snipcart.css"   rel="stylesheet" />
---->
-<style>
-.snipcart-checkout-container {
-   z-index: 9998;
-}	
-</style>
-	
-<!--- /snipcart --->	
-
-	
-	
 	<script src="js/bootstrap.min.js"></script>
 	<!-- include custom JavaScript -->
+	<!--- custom javascript --->
+	<script type="text/javascript" src="js/handlebars.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	
+	<script type="text/javascript" src="js/jquery.serializecfjson-0.2.min.js"></script>
 	<script src="js/jquery.main.js"></script>
 	<script src="//use.typekit.net/gmm3qiu.js"></script>
 	<script>try{Typekit.load();}catch(e){}</script>
@@ -308,7 +463,27 @@ Snipcart.execute('bind', 'page.change', function (page) {
 			document.querySelector('head').appendChild(msViewportStyle)
 		}
 	</script>
-	<script>
+	<script id="cart-content-text" type="text/template">
+    <div class="custom-snipcart-footer-text">
+    <h2>US Customers</h2>
+    <p>
+        Please use your 5 digit zipcode without the 4 digit extension.
+  </p>
+    </div>
+  </script>
+  <script>
+   $(document).ready(function(e) {
+	   //alert('doc ready');
+	   /*
+	   thisSlug = getParam('slug');
+	   if (thisSlug == ''){
+		   thisSlug = 'a-system-of-architectural-ornament';
+		   }
+	   getRelatedItems(thisSlug,99);
+	   */
+	   });
+  </script>
+  <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -318,14 +493,5 @@ ga('create', 'UA-60134857-1', 'auto');
 ga('send', 'pageview');
 
 </script>
-
-<script id="cart-content-text" type="text/template">
-    <div class="custom-snipcart-footer-text">
-    <h2>US Customers</h2>
-    <p>
-        Please use your 5 digit zipcode without the 4 digit extension.
-  </p>
-    </div>
-  </script>
 </body>
 </html>

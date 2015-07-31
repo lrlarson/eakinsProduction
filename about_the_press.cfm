@@ -54,6 +54,63 @@
     
      <script src="//load.sumome.com/" data-sumo-site-id="11be0b3abd38b378a2f1228d1d9ce1128ddc83df24ad056d375dd419420d1150" async="async"></script>
     
+    <!--- snipcart   PRODUCTION--->
+<script type="text/javascript"   src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript"   id="snipcart"   src="https://cdn.snipcart.com/scripts/snipcart.js"   data-api-key="NWUxNTljZDYtOWNjZi00NGNkLWEyMTQtODdiMDQ4NmI0ODdl"></script> 
+<script>
+  Snipcart.execute('config', 'show_continue_shopping', true);
+</script>
+
+
+<link type="text/css"   id="snipcart-theme"   href="https://app.snipcart.com/themes/base/snipcart.css"   rel="stylesheet" />
+<style>
+.snipcart-checkout-container {
+   z-index: 9999;
+}	
+</style>
+
+<script>
+/*	
+Snipcart.execute('config', 'allowed_shipping_methods', [
+    'usps-standard-post',
+    'usps-priority-mail-express-2-days',
+    'usps-priority-mail-2-day'
+]);	
+*/
+
+Snipcart.execute('config', 'allowed_shipping_methods', [ 
+'usps-priority-mail-1-day', 
+'usps-priority-mail-2-day' 
+]);
+
+var cartViews = 0;
+
+Snipcart.execute('bind', 'shippingaddress.changed', function (address) {
+    console.log(address);
+})
+
+Snipcart.execute('bind', 'cart.ready', function (data) {
+    console.log(data);
+});
+
+Snipcart.execute('bind', 'page.change', function (page) {
+    console.log(page);
+    if ((page == 'billing-address' || page == 'shipping-address') && (cartViews == 0)){
+	    cartViews ++;
+	    console.log('script triggered');
+	    var html = $("#cart-content-text").html();
+		$(html).insertBefore($("#snipcart-footer"));  
+    }else{
+	   if (!(page == 'billing-address' || page == 'shipping-address')){
+		   var html = '';
+		
+	   } 
+    }
+});	
+
+</script>		
+<!--- /snipcart --->
+
 </head>
 <body>
 	<!-- main container of all the page elements -->
@@ -108,6 +165,7 @@
 				</nav>
 			</div>
 		</header>
+		<div id="cart" class="snipcart-summary"><a href="#" class="snipcart-checkout"><span class="snipcart-total-items"></a></span></div>
 		<!-- contain main informative part of the site -->
 		<main id="main" role="main">
 			<!-- main carousel of the page -->
@@ -199,5 +257,13 @@ ga('create', 'UA-60134857-1', 'auto');
 ga('send', 'pageview');
 
 </script>
+<script id="cart-content-text" type="text/template">
+    <div class="custom-snipcart-footer-text">
+    <h2>US Customers</h2>
+    <p>
+        Please use your 5 digit zipcode without the 4 digit extension.
+  </p>
+    </div>
+  </script>
 </body>
 </html>

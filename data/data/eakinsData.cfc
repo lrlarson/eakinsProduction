@@ -308,7 +308,8 @@ SELECT relateditems.id,
 		set relateditems.content = '#relatedItem.content#', 
 			relateditems.title = '#relatedItem.title#',
 			relateditems.relatedItemClass = #relatedItem.itemClass#,
-			relateditems.link = '#relateditem.link#' 
+			relateditems.link = '#relateditem.link#' ,
+			relateditems.publish = '#relateditem.publish#'
 where  relateditems.id = #relatedItem.id#
 	</cfquery>
 	<cfreturn 1>
@@ -324,13 +325,15 @@ where  relateditems.id = #relatedItem.id#
 			book_id,
 			relatedItemClass,
 			title,
-			link
+			link,
+			publish
 			)values(
 			'#newItem.content#',
 			#newItem.book_id#,
 			#newItem.itemClass#,
 			'#newItem.title#',
-			'#newItem.link#'
+			'#newItem.link#',
+			'#newItem.publish#'
 			)
 	</cfquery>
 	<cfreturn 1>
